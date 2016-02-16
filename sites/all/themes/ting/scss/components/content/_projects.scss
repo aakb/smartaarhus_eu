@@ -1,0 +1,119 @@
+.view-ting-projects.view-display-id-page {
+  .views-row {
+    margin: 0 0 3em;
+  }
+  h3.title {
+
+  }
+  div.image {
+    margin-bottom: 1em;
+    @include bp(narrow) {
+      margin-left: -60px;
+      width: 570px;
+    }
+    @include bp(normal) {
+      width: 750px;
+    }
+  }
+  .resume {
+    line-height: 1.5;
+    margin: 0 0 1.5em;
+  }
+  .read-more {
+    text-align: right;
+    a {
+
+      font-family: $font-sans-serif;
+      text-transform: uppercase;
+      &:after {
+        @extend %icon;
+        content: "\ea3c";
+        padding: 0 0 0 5px;
+        position: relative;
+        top: 0.1em;
+      }
+    }
+  }
+}
+
+.view-id-ting_projects {
+  .views-exposed-form {
+    margin-bottom: 1.5em;
+    
+   
+    
+    #edit-field-project-category-tid-wrapper {
+      float: none;
+      text-align: center;
+      padding-bottom: 0.5em;
+      @include bp(450) {
+        
+        text-align: left;
+      }
+      label {
+        
+      }
+      .views-widget {
+        
+      }
+    }
+    
+    #edit-combine-wrapper {
+      float: none;
+      text-align: center;
+      @include bp(450) {
+        float: left;
+        text-align: left;
+      }
+      input.form-text {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+    
+    .views-submit-button {
+      float: none;
+      text-align: center;
+      @include bp(450) {
+        float: left;
+        text-align: left;
+      }
+      input.form-submit {
+        margin-top: 0;
+        line-height: 34px;
+        padding: 0 10px;
+      }  
+    }
+    
+  }
+}
+
+.node-type-project {
+  .field-name-field-main-subtitle {
+    margin: 0 0 1em;
+  }
+  .field-name-field-group-image {
+    margin-bottom: 1em;
+    @include bp(narrow) {
+      margin-left: -60px;
+      width: 570px;
+    }
+    @include bp(normal) {
+      width: 750px;
+    }
+  }
+
+  .panel-display {
+    margin-left: 0!important;
+    margin-right: 0!important;
+  }
+  .panel-panel.grid-8 {
+    margin: 0;
+    @include bp(narrow) {
+      width: 430px;
+    }
+    @include bp(normal) {
+      width: 590px;
+    }
+  }
+}

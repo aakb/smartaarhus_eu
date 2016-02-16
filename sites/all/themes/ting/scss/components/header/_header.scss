@@ -1,0 +1,81 @@
+#section-header {
+  background: $red;
+  color: $white;
+  position: relative;
+}
+
+#zone-user-wrapper {
+  background: darken($red, 10%);
+  position: relative;
+  z-index: 25;
+  @include bp(normal) {
+    background: none;
+  }
+}
+
+#zone-user {
+  @extend %clearfix;
+  width: auto;
+}
+
+#region-user-second {
+  font-size: 1.2em;
+  margin: 0;
+  padding: 0 10px 0 0;
+  width: auto;
+  float: right;
+  @include bp(normal) {
+    padding: 0 45px 0 0;
+    position: relative;
+    z-index: $z-user-second;
+  }
+}
+
+#block-smartaarhus-toggle-search {
+  float: right;
+  .content {
+    a {
+      color: $white;
+      display: inline-block;
+      line-height: 35px;
+      &:hover {
+        color: $black;
+      }
+      @include bp(normal) {
+        background: $red;
+        padding: 0 10px;
+      }
+    }
+  }
+}
+
+#block-smartaarhus-social-links {
+  float: right;
+  ul {
+    text-align: center;
+    li {
+      display: inline-block;
+      margin: 0 0 0 10px;
+      &.twitter {
+        margin: 0 0 0 13px;
+      }
+      a {
+        line-height: 35px;
+
+        .icon-facebook {
+          &:before {
+            font-size: 1.1em;
+            position: relative;
+            top: 0.05em;
+          }
+        }
+        .icon-twitter {
+          &:before {
+            position: relative;
+            top: 0.1em;
+          }
+        }
+      }
+    }
+  }
+}

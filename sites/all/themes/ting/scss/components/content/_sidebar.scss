@@ -1,0 +1,245 @@
+#region-sidebar-first {
+  margin-bottom: 40px;
+  body.not-front & {
+    @include bp(narrow) {
+      margin-left: 0;
+      margin-top: 40px;
+      width: 170px; // 160
+    }
+    @include bp(normal) {
+      width: 230px; // 220
+    }
+  }
+
+  body.responsive-layout-narrow &,
+  body.responsive-layout-normal & {
+    &.sticky {
+      position: fixed;
+      margin-top: 0;
+      top: 0;
+    }
+  }
+}
+
+.project-sidebar-block {
+  background: darken($light-grey, 10%);
+  font-family: $font-sans-serif;
+  padding: 10px;
+
+}
+
+/**
+ * To the top
+ */
+#block-smartaarhus-to-the-top {
+  background: darken($light-grey, 10%);
+  padding: 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  /*.block-inner {
+    border-top: 1px solid $black;
+    padding-top: 15px;
+  }*/
+}
+
+
+.latest-news-sidebar-block {
+  background: $blue;
+  color: $white;
+  .views-row {
+    position: relative;
+    a {
+      color: $white!important;
+      &:hover {
+        .news-entry-image {
+          visibility: visible;
+        }
+        .news-entry-text {
+          background: rgba($blue, 0.7);
+        }
+        .news-entry-read-more {
+          &:before {
+            width: 40px;
+          }
+        }
+      }
+    }
+  }
+
+  .news-entry-image {
+    visibility: hidden;
+    display: none;
+    @include bp(narrow) {
+      display: block;
+    }
+    img {
+      display: block;
+    }
+  }
+  .news-entry-text {
+    @extend %border-box;
+    background: $blue;
+    padding: 20px;
+  
+    @include bp(narrow) {
+      bottom: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;  
+    }
+    
+    span {
+      display: block;
+    }
+    .news-entry-date {
+      color: rgba($white, 0.6);
+      font-family: $font-sans-serif;
+      font-size: 12px;
+      margin: 0 0 1em;
+      strong {
+        color: $white;
+        font-weight: normal;
+        text-transform: uppercase;
+      }
+    }
+    .news-entry-title {
+      font-size: 16px;
+      line-height: 21px;
+      margin: 0 0 1em;
+    }
+    .news-entry-read-more {
+      font-size: 12px;
+      position: relative;
+      text-transform: uppercase;
+      
+      @include bp(narrow) {
+        bottom: 20px;
+        position: absolute;  
+      }
+      
+      &:before {
+        border-top: 1px solid $white;
+        content: "";
+        height: 1px;
+        top: -10px;
+        position: absolute;
+        width: 20px;
+      }
+    }
+  }
+
+  .view-footer {
+    font-size: 12px;
+    padding: 15px 20px 20px;
+    p {
+      border-top: 1px solid $white;
+      padding: 15px 0 0;
+      a {
+        color: $white;
+        text-transform: uppercase;
+        &:after {
+          @extend %icon;
+          content: "\ea3c";
+          padding: 0 0 0 5px;
+          position: relative;
+          top: 0.1em;
+        }
+      }
+    }
+  }
+}
+
+.projects-sidebar-block {
+  background: $dark-grey;
+  color: $white;
+  .views-row {
+    position: relative;
+    a {
+      color: $white;
+      display: block;
+      &:hover {
+        .project-entry-text {
+          background: rgba($red, 0.8);
+        }
+        .project-entry-read-more {
+          &:before {
+            width: 40px;
+          }
+        }
+      }
+    }
+  }
+  .project-entry-image {
+    display: none;
+    @include bp(narrow) {
+      display: block;
+    }
+    img {
+      display: block;
+    }
+  }
+  .project-entry-text {
+    @extend %border-box;
+    background: $dark-grey;
+    padding: 20px;
+
+    @include bp(narrow) {
+      bottom: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;  
+    }
+    
+    span {
+      display: block;
+    }
+  }
+  .project-entry-title {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .project-entry-subtitle {
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .project-entry-read-more {
+    font-size: 12px;
+    position: relative;
+    text-transform: uppercase;
+    
+    @include bp(narrow) {
+      bottom: 20px;
+      position: absolute;  
+    }
+    
+    &:before {
+      border-top: 1px solid $white;
+      content: "";
+      height: 1px;
+      top: -10px;
+      position: absolute;
+      width: 20px;
+    }
+  }
+
+  .view-footer {
+    font-size: 12px;
+    padding: 15px 20px 20px;
+    p {
+      border-top: 1px solid $white;
+      padding: 15px 0 0;
+      a {
+        color: $white;
+        text-transform: uppercase;
+        &:after {
+          @extend %icon;
+          content: "\ea3c";
+          padding: 0 0 0 5px;
+          position: relative;
+          top: 0.1em;
+        }
+      }
+    }
+  }
+}

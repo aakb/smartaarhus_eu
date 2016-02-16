@@ -1,0 +1,5 @@
+name = Smart Aarhus
+description = Miscellaneous theme specific blocks and hooks
+package = Create Inside
+core = 7.x
+dependencies[] = fapi_validation

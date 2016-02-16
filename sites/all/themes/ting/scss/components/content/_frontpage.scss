@@ -1,0 +1,295 @@
+/**
+ * Projects
+ */
+#block-views-ting-projects-block-1 {
+
+  padding: 70px 0 50px;
+
+  .view-id-ting_projects {
+    position: relative;
+    @include bp(narrow) {
+      margin: 0 -10px;
+    }
+  }
+
+  .view-content {
+    @extend %clearfix;
+    .views-row {
+      margin-bottom: 2em;
+    }
+
+    a {
+      display: block;
+      position: relative;
+      color: $black;
+      &:hover {
+        color: $white;
+        .project-entry-text {
+          background: rgba($blue, 0.5);
+        }
+        .project-entry-text-inner {
+          top: 10px;
+          right: 10px;
+          bottom: 10px;
+          left: 10px;
+          width: auto;
+          border: 1px solid $white;
+        }
+        .project-entry-text-content {
+          background: none;
+        }
+        .project-read-more {
+          &:before {
+            border-color: $white;
+            width: 40px;
+          }
+        }
+      }
+    }
+    .project-entry-text {
+      @extend %border-box;
+      bottom: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+    }
+    .project-entry-text-inner {
+      @extend %border-box;
+      bottom: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+    }
+    .project-entry-text-content {
+      @extend %border-box;
+      background: $white;
+      bottom: 0;
+      padding: 20px;
+      position: absolute;
+      width: 100%;
+    }
+      .project-title {
+        display: block;
+        font-size: 18px;
+      }
+      .project-subtitle {
+        display: block;
+        font-style: italic;
+        padding: 0 0 20px;
+      }
+      .project-read-more {
+        font-size: 12px;
+        position: relative;
+        text-transform: uppercase;
+        &:before {
+          border-top: 1px solid $black;
+          content: "";
+          height: 1px;
+          top: -10px;
+          position: absolute;
+          width: 20px;
+        }
+
+      }
+  }
+  
+  .item-list {
+
+  }
+
+  ul.pager {
+    display: none;
+    @include bp(wide) {
+      display: block;
+  }
+    li {
+      display: block;
+      padding: 0;
+      position: absolute;
+      top: 50%;
+      margin: -100px 0 0 0;
+      height: 100px;
+      &.pager-previous {
+        left: -60px;
+        a {
+          text-align: left;
+        }
+      }
+      &.pager-current {
+        display: none;
+      }
+      &.pager-next {
+        right: -60px;
+        a {
+          text-align: right;
+        }
+      }
+      a {
+        color: $dark-grey;
+        font-size: 5em;
+        line-height: 100px;
+        display: block;
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+  }
+
+  .view-footer {
+    text-align: center;
+
+
+    .entity-bean {
+      margin: 0 0 2em;
+      padding: 0 20px;
+      @include bp(narrow) {
+        padding: 0 80px;
+      }
+      @include bp(normal) {
+        padding: 0 140px;
+      }
+    }
+
+    a {
+      color: $blue;
+      font-family: $font-sans-serif;
+      text-transform: uppercase;
+      &:after {
+        @extend %icon;
+        content: "\ea3c";
+        padding: 0 0 0 10px;
+        position: relative;
+        top: 0.1em;
+      }
+    }
+  }
+}
+
+/**
+ * News
+ */
+#zone-postscript-top-wrapper {
+  background: $white;
+}
+
+#block-views-smart-aarhus-latest-news-block {
+  padding: 70px 0 50px;
+  
+  .block-title {
+    margin: 0 0 0.5em;
+  }
+
+  .view-content {
+    @extend %clearfix;
+  }
+  .views-row {
+    margin: 0 0 2px;
+    @include bp(narrow) {
+      width: 349px;
+      float: left;
+      &.views-row-odd {
+        margin: 0 1px 2px 0;
+      }
+      &.views-row-even {
+        margin: 0 0 2px 1px;
+      }
+    }
+    @include bp(normal) {
+      width: 233px;
+      &.views-row-odd,
+      &.views-row-even {
+        margin: 0 1px;
+      }
+    }
+    a {
+      color: $black;
+      display: block;
+      position: relative;
+      &:hover {
+        color: $white;
+        .news-entry-image {
+          visibility: visible;
+        }
+        .news-entry-text {
+          background: rgba($dark-grey, 0.7);
+        }
+        .news-entry-read-more {
+          &:before {
+            border-color: $white;
+            width: 40px;
+          }
+        }
+      }
+    }
+    .news-entry-image {
+      visibility: hidden;
+    }
+    .news-entry-text {
+      @extend %border-box;
+      background: $light-grey;
+      bottom: 0;
+      padding: 20px;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      span {
+        display: block;
+      }
+      .news-entry-date {
+        font-family: $font-sans-serif;
+        font-size: 12px;
+        margin: 0 0 1em;
+        strong {
+          font-weight: normal;
+          text-transform: uppercase;
+        }
+      }
+      .news-entry-title {
+        font-size: 18px;
+        line-height: 21px;
+        margin: 0 0 1em;
+      }
+      .news-entry-body {
+        display: none;
+        padding: 0 0 20px;
+        @include bp(narrow) {
+          display: block;
+        }
+      }
+      .news-entry-read-more {
+        bottom: 20px;
+        font-size: 12px;
+        position: absolute;
+        text-transform: uppercase;
+        &:before {
+          border-top: 1px solid $black;
+          content: "";
+          height: 1px;
+          top: -10px;
+          position: absolute;
+          width: 20px;
+        }
+      }
+    }
+  }
+
+  .view-footer {
+    margin: 2em 0 0;
+    text-align: center;
+    a {
+      color: $blue;
+      font-family: $font-sans-serif;
+      text-transform: uppercase;
+      &:after {
+        @extend %icon;
+        content: "\ea3c";
+        padding: 0 0 0 10px;
+        position: relative;
+        top: 0.1em;
+      }
+    }
+  }
+}

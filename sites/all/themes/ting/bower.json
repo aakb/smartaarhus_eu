@@ -1,0 +1,7 @@
+{
+  "name": "smartaarhus",
+  "version": "0.1.0",
+  "dependencies": {
+    "jQuery.mmenu": "~4.7.5"
+  }
+}

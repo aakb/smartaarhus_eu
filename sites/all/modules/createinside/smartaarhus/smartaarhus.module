@@ -1,0 +1,179 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function smartaarhus_block_info()
+{
+    $blocks = array();
+
+    $blocks['social_links'] = array(
+        'info' => t('Social links'),
+    );
+    $blocks['toggle_mobile_menu'] = array(
+        'info' => t('Toggle mobile menu')
+    );
+    $blocks['toggle_search'] = array(
+        'info' => t('Toggle search')
+    );
+    $blocks['to_the_top'] = array(
+        'info' => t('To the top')
+    );
+
+    return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function smartaarhus_block_view($delta = '')
+{
+    $block = array();
+
+    switch($delta) {
+        case 'social_links':
+            $block['subject'] = t('');
+            $block['content'] = _smartaarhus_social_links_view();
+            break;
+        case 'toggle_mobile_menu':
+            $block['subject'] = t('');
+            $block['content'] = _smartaarhus_toggle_mobile_menu_view();
+            break;
+        case 'toggle_search':
+            $block['subject'] = t('');
+            $block['content'] = _smartaarhus_toggle_search_view();
+            break;
+        case 'to_the_top':
+            $block['subject'] = t('');
+            $block['content'] = _smartaarhus_to_the_top_view();
+            break;
+    }
+
+    return $block;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function smartaarhus_block_configure($delta = '')
+{
+    $form = array();
+
+    switch($delta) {
+        case 'social_links':
+            $form['social_links_facebook'] = array(
+                '#type' => 'textfield',
+                '#title' => t('Facebook'),
+                '#size' => 60,
+                '#description' => t('Link to Facebook page'),
+                '#default_value' => variable_get('social_links_facebook'),
+                '#rules' => array(
+                    'url',
+                    array(
+                        'rule' => 'url[absolute]',
+                        'error callback' => '_smartaarhus_social_links_error_msg',
+                    )
+                ),
+            );
+            $form['social_links_twitter'] = array(
+                '#type' => 'textfield',
+                '#title' => t('Twitter'),
+                '#size' => 60,
+                '#description' => t('Link to Twitter page'),
+                '#default_value' => variable_get('social_links_twitter'),
+                '#rules' => array(
+                    'url',
+                    array(
+                        'rule' => 'url[absolute]',
+                        'error callback' => '_smartaarhus_social_links_error_msg',
+                    )
+                ),
+            );
+            break;
+    }
+
+    return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function smartaarhus_block_save($delta = '', $edit = array())
+{
+    switch($delta) {
+        case 'social_links':
+            variable_set('social_links_facebook', $edit['social_links_facebook']);
+            variable_set('social_links_twitter', $edit['social_links_twitter']);
+            break;
+    }
+}
+
+function _smartaarhus_social_links_error_msg($rule, $params, $element, $form_state)
+{
+    return t('Please type a valid URL');
+}
+
+/**
+ * Social links view
+ */
+function _smartaarhus_social_links_view()
+{
+    $html = '';
+
+    $facebook = variable_get('social_links_facebook');
+    $twitter = variable_get('social_links_twitter');
+
+    $html .= '<ul>';
+
+    if(isset($facebook) && $facebook != "") {
+        $html .= '<li class="facebook"><a target="_blank" href="'.$facebook.'"><span class="icon-facebook"></span></a></li>';
+    }
+    if(isset($twitter) && $twitter != "") {
+        $html .= '<li class="twitter"><a target="_blank" href="'.$twitter.'"><span class="icon-twitter"></span></a></li>';
+    }
+
+    $html .= '</ul>';
+
+    return $html;
+}
+
+
+/**
+ * Toggle search view
+ */
+function _smartaarhus_toggle_search_view()
+{
+    $html = '';
+
+    $html .= '<a href="/search"><span class="icon-search"></span></a>';
+
+    return $html;
+}
+
+
+
+/**
+ * Toggle mobile menu view
+ */
+function _smartaarhus_toggle_mobile_menu_view()
+{
+    $html = '';
+
+    $html .= '<span class="icon-menu"></span>';
+
+    return $html;
+}
+
+/**
+ * To the top view
+ */
+function _smartaarhus_to_the_top_view()
+{
+    $html = '';
+
+    $html .= t('To the top').' <span class="icon-align-top"></span>';
+
+    return $html;
+}
+
+

@@ -1,0 +1,36 @@
+/*
+========================================================================== 
+	Fonts
+========================================================================== 
+*/
+
+// Serif
+@import url(http://fonts.googleapis.com/css?family=Sanchez:400italic,400);
+// Sans Serif
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+$font-fam-pri: 'Montserrat', sans-serif;
+$font-fam-sec: 'Sanchez', serif;
+
+$font-size-std-px: 12;
+$font-size-small: (10/$font-size-std-px)*1em;
+$font-size-std: 1em;
+$font-size-medium: (14/$font-size-std-px)*1em;
+$font-size-large: (15/$font-size-std-px)*1em;
+$font-size-larger: (25/$font-size-std-px)*1em;
+$font-size-largest: (30/$font-size-std-px)*1em;
+
+$font-weight-normal: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+$line-height-std: 1.3em;
+
+/*
+========================================================================== 
+	Animations
+========================================================================== 
+*/
+$anim-speed: 250ms;
+$anim-ease-type: 'easeinout';

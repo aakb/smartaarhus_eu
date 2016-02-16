@@ -1,0 +1,141 @@
+/**
+ * Slideshow
+ */
+#zone-slideshow-wrapper {
+  @include bp(narrow) {
+    // push the slider under the user region
+    //margin-top: -35px;
+    #region-slideshow {
+      margin-top: -35px;
+    }
+
+  }
+  body.not-front & {
+    margin-top: 0;
+    position: absolute;
+    top: 130px;
+    @include bp(narrow) {
+      top: 0;
+    }
+  }
+}
+
+#zone-slideshow {
+  width: auto;
+}
+
+#region-slideshow {
+  margin: 0;
+  width: auto;
+}
+
+#block-views-background-image-block {
+
+}
+
+.view-ting-slideshow {
+  .flexslider {
+    // overwrite default flexslider styles: start
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    // overwrite default flexslider styles: end
+    ul.slides {
+      li {
+        position: relative;
+        .views-field-field-slide-image {
+
+        }
+        .views-field-nothing {
+          padding: 20px 10px;
+          position: absolute;
+          text-shadow: 1px 1px 1px rgba(0,0,0,0.8);
+          bottom: 0;
+          @include bp(narrow) {
+            bottom: 100px;
+            padding: 0 45px;
+            left: 0;
+            text-shadow: none;
+            z-index: $z-slide-text;
+          }
+          @include bp(normal) {
+            //bottom: 130px;
+
+            .half {
+              width: 75%;
+
+            }
+          }
+
+          .slide-title {
+            font-size: 18px;
+            margin: 0 0 0.5em;
+            @include bp(narrow) {
+              font-size: 25px;
+            }
+            @include bp(normal) {
+              font-size: 45px;
+              &:before {
+                border-top: 1px solid $white;
+                content: "";
+                height: 1px;
+                top: -20px;
+                position: absolute;
+                width: 250px;
+              }
+            }
+            @include bp(wide) {
+              font-size: 55px;
+            }
+          }
+          .slide-body {
+            font-size: 14px;
+
+            margin: 0 0 0.5em;
+            @include bp(normal) {
+              font-size: 20px;
+            }
+            @include bp(wide) {
+              font-size: 25px;
+            }
+
+          }
+          ul {
+            margin: 0;
+            li {
+              margin: 0;
+            }
+          }
+          a {
+            font-family: $font-sans-serif;
+            &:before {
+              @extend %icon;
+              content: "\ea3c";
+              padding: 0 5px 0 0;
+              position: relative;
+              top: 0.1em;
+            }
+          }
+        }
+      }
+    }
+    ol.flex-control-nav {
+      // overwrite default flexslider styles: start
+      bottom: 40px;
+      // overwrite default flexslider styles: end
+      display: none;
+      @include bp(narrow) {
+        display: block;
+        z-index: $z-slide-control;
+      }
+      a {
+        background: $white;
+        &.flex-active {
+          background: $light-blue;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+#block-delta-blocks-breadcrumb {
+  color: darken($light-grey, 30%);
+  font-family: $font-sans-serif;
+  font-size: 12px;
+  margin: 0 0 1em;
+
+  .breadcrumb {
+    a {
+      &:after {
+
+      }
+    }
+
+  }
+}

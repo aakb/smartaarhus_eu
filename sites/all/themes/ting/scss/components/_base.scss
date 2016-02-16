@@ -1,0 +1,229 @@
+body {
+  background: $dark-grey;
+  font-family: $font-serif;
+  font-size: 14px;
+}
+
+/**
+ * Images
+ */
+img {
+  height: auto;
+  max-width: 100%;
+  width: auto;
+}
+
+/**
+ * Links
+ */
+a {
+  text-decoration: none;
+  #section-header & {
+    color: $white;
+    &:hover {
+      color: $black;
+    }
+    @include bp(normal) {
+      color: $black;
+      &:hover {
+        color: $red;
+      }
+    }
+  }
+  #zone-slideshow & {
+    color: $light-blue;
+    &:hover {
+      color: $white;
+    }
+  }
+  .tabs & {
+    color: $red;
+  }
+  .breadcrumb &,
+  #region-content .field-name-body & {
+    color: $red;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  #section-footer & {
+    color: $white;
+  }
+  #block-menu-block-2 & {
+    color: $white;
+    &:hover {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
+
+  // main menu level 2
+  #block-menu-block-3 & {
+    color: $black;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .view-ting-news .read-more & {
+    color: $blue!important;
+  }
+  .view-ting-projects .read-more & {
+    color: $blue!important;
+  }
+
+  .project-sidebar-block & {
+    color: $red;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  .panel-left & {
+    color: $red;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .rrssb-buttons & {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+/**
+ * Headlines
+ */
+h1, h2, h3 {
+  font-family: $font-serif;
+}
+
+h1 {
+  font-family: $font-sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 0 0 0.5em;
+}
+
+h2 {
+  font-size: 18px;
+  #region-content & {
+    line-height: 1.5;
+    padding: 10px 0 0;
+  }
+
+  #section-footer & {
+    font-family: $font-sans-serif;
+    font-weight: normal;
+    margin: 0 0 1em;
+  }
+
+  #block-views-ting-projects-block-1 & {
+    font-family: $font-sans-serif;
+    margin: 0 0 1.5em;
+  }
+
+  .project-sidebar-block & {
+    margin: 0 0 1em;
+  }
+
+  .view-smart-aarhus-latest-news & {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+h3 {
+  font-size: 16px;
+  div.view-ting-news & {
+    font-family: $font-sans-serif;
+    margin: 0 0 1em;
+    a {
+      color: $black!important;
+    }
+  }
+  div.view-ting-projects & {
+    font-family: $font-sans-serif;
+    margin: 0 0 1em;
+    a {
+      color: $black!important;
+    }
+  }
+  div.view-ting-news .resume & {
+    line-height: 1.5;
+    margin: 0;
+
+  }
+
+  .project-sidebar-block & {
+    margin: 0 0 1em;
+  }
+
+  .view-smart-aarhus-latest-news & {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+/**
+ * Paragraphs
+ */
+p {
+  line-height: 1.5;
+
+  .slide-body & {
+    line-height: 1.2;
+  }
+
+  #region-content & {
+    margin: 0 0 0.5em
+  }
+
+  #region-bottom & {
+    margin: 0 0 0.5em;
+  }
+
+  .project-sidebar-block & {
+    margin: 0 0 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Forms
+ */
+label {
+  line-height: 1.5;
+}
+input.form-text {
+  font-family: $font-sans-serif;
+  font-size: 16px;
+  line-height: 2;
+  padding: 0 5px;
+}
+input.form-submit {
+  background: $red;
+  border: 1px solid $red;
+  color: $white;
+  cursor: pointer;
+  font-family: $font-sans-serif;
+  line-height: 2;
+  text-transform: uppercase;
+  &:hover {
+    background: $white;
+    color: $red;
+  }
+}
+div.description {
+  font-family: $font-sans-serif;
+  line-height: 1.5;
+}

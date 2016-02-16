@@ -1,0 +1,115 @@
+#zone-menu-wrapper {
+  background: $red; //rgba($red, 0.9);
+  position: relative;
+  z-index: 20;
+  @include bp(normal) {
+    background: none;
+    position: absolute;
+    width: 100%;
+    z-index: $z-index-menu;
+  }
+  body.not-front & {
+    margin-bottom: 40px;
+    @include bp(normal) {
+      margin-bottom: 0;
+      padding-bottom: 40px;
+      position: relative;
+    }
+  }
+
+}
+
+#zone-menu {
+  width: auto;
+  @include bp(narrow) {
+    //padding: 0 45px;
+  }
+}
+
+/**
+ * Logo
+ */
+#region-branding {
+  margin: 0;
+  .region-inner {
+    float: left;
+    width: 75%;
+    @include bp(normal) {
+      float: none;
+      padding: 0 0 0 45px;
+      width: auto;
+    }
+  }
+  .logo-img {
+    padding: 20px 10px;
+    width: 60px * $logoAspect;
+    @include bp(normal) {
+
+    }
+    @include bp(normal) {
+      padding: 0;
+      width: auto;
+    }
+  }
+}
+
+#region-menu {
+  margin: 0;
+  float: right;
+  width: auto;
+  @include bp(normal) {
+    float: left;
+  }
+  .region-inner {
+    @extend %border-box;
+
+    @include bp(normal) {
+      //float: none;
+      padding: 0 0 0 30px;
+      //width: auto;
+    }
+  }
+}
+
+/**
+ * Main menu block
+ */
+#block-menu-block-2 {
+  display: none;
+  @include bp(normal) {
+    display: block;
+    font-family: $font-sans-serif;
+    //font-weight: bold;
+    ul.menu {
+      li {
+        margin: 0 0 1em;
+        a {
+          &.active,
+          &.active-trail {
+            &:before {
+              content: "_";
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Toggle mobile menu
+ */
+#block-smartaarhus-toggle-mobile-menu {
+  color: $white;
+  cursor: pointer;
+  font-size: 2em;
+  line-height: 100px;
+  padding: 0 10px;
+  text-align: right;
+  &:hover {
+    color: $light-blue;
+  }
+  @include bp(normal) {
+    display: none;
+  }
+}

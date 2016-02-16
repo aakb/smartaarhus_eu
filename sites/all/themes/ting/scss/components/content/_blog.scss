@@ -1,0 +1,39 @@
+.view-ting-news {
+  .views-row {
+    margin: 0 0 3em;
+    .title {
+
+    }
+    .meta {
+      margin: 0 0 1em;
+    }
+    div.image {
+      margin-bottom: 1em;
+      @include bp(narrow) {
+        margin-left: -60px;
+        width: 570px;
+      }
+      @include bp(normal) {
+        width: 750px;
+      }
+    }
+    .resume {
+
+    }
+    .read-more {
+      text-align: right;
+      a {
+
+        font-family: $font-sans-serif;
+        text-transform: uppercase;
+        &:after {
+          @extend %icon;
+          content: "\ea3c";
+          padding: 0 0 0 5px;
+          position: relative;
+          top: 0.1em;
+        }
+      }
+    }
+  }
+}
