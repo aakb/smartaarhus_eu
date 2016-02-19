@@ -1,10 +1,5 @@
 .view-ting-projects.view-display-id-page {
-  .views-row {
-    margin: 0 0 3em;
-  }
-  h3.title {
 
-  }
   div.image {
     margin-bottom: 1em;
     @include bp(narrow) {
@@ -33,6 +28,10 @@
         top: 0.1em;
       }
     }
+  }
+
+  .view-content {
+    margin-left: -10px;
   }
 }
 
