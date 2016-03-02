@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the smartaarhus_images feature.
+ */
+
+include_once 'smartaarhus_images.features.inc';
