@@ -1,5 +1,15 @@
 #section-content {
   background: $light-grey;
+
+  .content .content ul,
+  .content .content  ol {
+    list-style: initial;
+    padding: 1em 1.2em;
+  }
+
+  .content .content  ol {
+    list-style-type: decimal;
+  }
 }
 
 #region-content {
@@ -21,6 +31,18 @@
   }
 
 
+  body.not-front.page-projects & {
+    @include bp(narrow) {
+      margin-right: 0;
+      width: 100%;
+    }
+    @include bp(normal) {
+      width: 100%;
+    }
+    .region-inner {
+      width: 100%;
+    }
+  }
 }
 
 div.tabs {

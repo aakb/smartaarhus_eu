@@ -293,3 +293,10 @@
     }
   }
 }
+
+
+.page-projects .block-main {
+  @extend #block-views-ting-projects-block-1;
+
+  padding-top: 0;
+}

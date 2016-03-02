@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the smartaarhus_admin feature.
+ */
+
+include_once 'smartaarhus_admin.features.inc';

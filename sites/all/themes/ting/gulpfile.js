@@ -1,37 +1,119 @@
-(function () {
-    'use strict';
+// Plugins.
+var gulp = require('gulp');
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
+var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var ngAnnotate = require('gulp-ng-annotate');
+var rename = require('gulp-rename');
+var compass = require('gulp-compass');
 
-    var autoPrefixer = require('gulp-autoprefixer');
-    var gulp = require('gulp');
-    var jshint = require('gulp-jshint');
-    var plumber = require('gulp-plumber');
-    var sass = require('gulp-ruby-sass');
-    var stylish = require('jshint-stylish');
+/**
+ * Setting up browsersync.
+ * Proxy is the name of the vagrent.
+ * Host is the the ip defined in "vagrantfile"
+ */
 
-    gulp.task('default', ['build', 'watch'], function() {
-    });
+var browserSync = require('browser-sync').create();
+browserSync.init({
+    proxy: "smartaarhuseu.vm",
+    host: "smartaarhuseu.vm"
+});
 
-    gulp.task('build', ['compileSASS', 'jshint'], function() {
-    });
 
-    gulp.task('watch', ['build'], function() {
-        gulp.watch(['scss/**/*.scss'], ['compileSASS']);
-        gulp.watch(['js/*.js'], ['jshint']);
-    });
+// We only want to process our own non-processed JavaScript files.
+var jsPath = ['./scripts/*.js', '!./js/*.min.*'];
+var sassPath = './sass/**/*.scss';
+var phpPath = './**/*.php'; //could also be twig files
+var buildDir = './js';
 
-    gulp.task('compileSASS', function() {
-        return gulp.src(['scss/*.scss'])
-            .pipe(plumber())
-            .pipe(sass({"sourcemap=none": true, style: 'expanded'}))
-            .pipe(autoPrefixer('last 2 version'))
-            .pipe(gulp.dest('css'));
-    });
 
-    gulp.task('jshint', function() {
-        return gulp.src(['js/*.js'])
-            .pipe(plumber())
-            .pipe(jshint())
-            .pipe(jshint.reporter(stylish));
-    });
+/**
+ * Run Javascript through JSHint.
+ */
+gulp.task('jshint', function() {
+    return gulp.src(jsPath)
+      .pipe(jshint())
+      .pipe(jshint.reporter(stylish));
+});
 
-})();
+/**
+ * Process SCSS using libsass
+ */
+gulp.task('sass', function () {
+    gulp.src(sassPath)
+      .pipe(sourcemaps.init())
+      .pipe(sass({
+          // outputStyle: 'compressed',
+          includePaths: [
+              '/usr/lib/node_modules/compass-mixins/lib'
+          ]
+      }).on('error', sass.logError))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('./css'))
+      .pipe(browserSync.stream());
+});
+
+/**
+ * Watch files for changes and run tasks.
+ */
+
+gulp.task('watch', function() {
+    gulp.watch(jsPath, ['jshint']);
+    gulp.watch(sassPath, ['sass']);
+    gulp.watch(phpPath).on('change', browserSync.reload);
+    gulp.watch(jsPath).on('change',browserSync.reload);
+});
+
+
+/**
+ * Watch javascript files for changes.
+ */
+
+gulp.task('js-watch', function() {
+    gulp.watch(jsPath, ['jshint']);
+});
+
+/**
+ * Build single app.js file.
+ */
+gulp.task('buildJs', function () {
+    gulp.src(jsPath)
+      .pipe(sourcemaps.init())
+      .pipe(uglify())
+      .pipe(sourcemaps.write('/maps'))
+      .pipe(rename({extname: ".min.js"}))
+      .pipe(gulp.dest(buildDir))
+});
+
+/**
+ * Build single app.js file.
+ */
+gulp.task('assetsJs', function () {
+    gulp.src(jsAssets)
+      .pipe(concat('assets.js'))
+      .pipe(rename({extname: ".min.js"}))
+      .pipe(gulp.dest(buildDir))
+});
+
+
+/**
+ * Use compass
+ */
+gulp.task('compass', function() {
+    gulp.src(sassPath)
+      .pipe(compass({
+          css: 'css',
+          sass: 'scss',
+          image: 'img'
+      }))
+      .pipe(minifycss())
+      .pipe(gulp.dest('html/css'));
+});
+
+
+// Tasks to compile sass and watch js file.
+gulp.task('default', ['sass', 'watch']);
+gulp.task('build', ['buildJs', 'sass']);
