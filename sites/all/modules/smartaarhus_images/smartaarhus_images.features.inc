@@ -246,7 +246,7 @@ function smartaarhus_images_image_default_styles() {
     'name' => 'news_thumbnail_normalcustom_user_normal_breakpoint_1x',
     'label' => 'News teaser on desktop display',
     'effects' => array(
-      50 => array(
+      47 => array(
         'label' => 'Manual Crop: Crop and scale',
         'help' => 'Crop and scale a user-selected area, respecting the ratio of the destination width and height.',
         'effect callback' => 'manualcrop_crop_and_scale_effect',
@@ -257,8 +257,8 @@ function smartaarhus_images_image_default_styles() {
         'data' => array(
           'width' => 235,
           'height' => 345,
-          'upscale' => 0,
-          'respectminimum' => 1,
+          'upscale' => 1,
+          'respectminimum' => 0,
           'onlyscaleifcrop' => 0,
           'style_name' => 'news_thumbnail_normalcustom_user_normal_breakpoint_1x',
         ),
@@ -489,7 +489,7 @@ function smartaarhus_images_image_default_styles() {
     'name' => 'project_thumbnail_rsbreakpointscustom_user_normal_1x',
     'label' => 'Project teaser on desktop display',
     'effects' => array(
-      48 => array(
+      46 => array(
         'label' => 'Manual Crop: Crop and scale',
         'help' => 'Crop and scale a user-selected area, respecting the ratio of the destination width and height.',
         'effect callback' => 'manualcrop_crop_and_scale_effect',
@@ -500,8 +500,8 @@ function smartaarhus_images_image_default_styles() {
         'data' => array(
           'width' => 300,
           'height' => 330,
-          'upscale' => 0,
-          'respectminimum' => 1,
+          'upscale' => 1,
+          'respectminimum' => 0,
           'onlyscaleifcrop' => 0,
           'style_name' => 'project_thumbnail_rsbreakpointscustom_user_normal_1x',
         ),
