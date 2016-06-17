@@ -1,0 +1,17 @@
+name = Commons Like
+description = Community members can indicate that they like content and comments.
+core = 7.x
+package = Commons - Building blocks
+version = 7.x-3.11
+project = commons
+dependencies[] = entityreference
+dependencies[] = features
+dependencies[] = message
+dependencies[] = rate
+dependencies[] = strongarm
+dependencies[] = votingapi
+datestamp = 1398473330
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[message_type][] = commons_like_user_likes_node
+mtime = 1455871689
