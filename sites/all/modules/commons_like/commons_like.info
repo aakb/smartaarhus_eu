@@ -1,17 +1,25 @@
 name = Commons Like
-description = Community members can indicate that they like content and comments.
-core = 7.x
+description = Allows users to indicate that they like certain content and comments.
 package = Commons - Building blocks
-version = 7.x-3.11
-project = commons
+core = 7.x
+
 dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = message
 dependencies[] = rate
 dependencies[] = strongarm
 dependencies[] = votingapi
-datestamp = 1398473330
+
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
+features[field_instance][] = message-commons_like_user_likes_node-field_target_nodes
 features[message_type][] = commons_like_user_likes_node
-mtime = 1455871689
+features[variable][] = field_bundle_settings_message__commons_like_user_likes_node
+features[variable][] = rate_widgets
+
+; Information added by Drupal.org packaging script on 2016-06-07
+version = "7.x-3.37"
+core = "7.x"
+project = "commons"
+datestamp = "1465310357"
+
