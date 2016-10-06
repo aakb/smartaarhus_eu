@@ -7,16 +7,6 @@
 include_once 'commons_like.features.inc';
 
 /**
- * Implements hook_features_export_alter().
- */
-function commons_like_features_export_alter(&$export, $module_name) {
-  /* don't export strongarm anymore */
-  if($module_name == 'commons_like' && isset($export['features']['variable'])) {
-    unset($export['features']['variable']);
-  }
-}
-
-/**
  * Implements hook_strongarm_alter().
  */
  function commons_like_strongarm_alter(&$items) {
@@ -24,7 +14,6 @@ function commons_like_features_export_alter(&$export, $module_name) {
   // by altering the configuration for the Rate.module widget that it provides.
   if (!empty($items['rate_widgets']->value)) {
     foreach($items['rate_widgets']->value as $key => $widget) {
-/*
       if ($widget->name == 'commons_like') {
         $commons_entity_integrations = commons_entity_integration_info();
         if (!empty($commons_entity_integrations['node'])) {
@@ -38,7 +27,6 @@ function commons_like_features_export_alter(&$export, $module_name) {
           }
         }
       }
-*/
     }
   }
 }
@@ -48,7 +36,6 @@ function commons_like_features_export_alter(&$export, $module_name) {
  *   Create a message when a user likes a node.
  */
 function commons_like_votingapi_insert($votes) {
-/*
   foreach ($votes as $vote) {
     if ($vote['tag'] == 'commons_like' && $vote['entity_type'] == 'node') {
       $node = node_load($vote['entity_id']);
@@ -58,7 +45,6 @@ function commons_like_votingapi_insert($votes) {
       $wrapper->save();
     }
   }
-*/
 }
 
 /**
