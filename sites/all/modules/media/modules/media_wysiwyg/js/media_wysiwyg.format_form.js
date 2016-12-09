@@ -33,8 +33,22 @@ Drupal.behaviors.mediaFormatForm = {
 Drupal.media.formatForm.getOptions = function () {
   // Get all the values
   var ret = {};
+  // Keep track of multi-value fields.
+  var fieldDelta = {};
 
   $.each($('#media-wysiwyg-format-form .fieldset-wrapper *').serializeArray(), function (i, field) {
+
+    // Support multi-value select lists, which show up here with [] at the end.
+    if ('[]' == field.name.slice(-2)) {
+      if (typeof fieldDelta[field.name] === 'undefined') {
+        fieldDelta[field.name] = 0;
+      }
+      else {
+        fieldDelta[field.name] += 1;
+      }
+      field.name = field.name.replace('[]', '[' + fieldDelta[field.name] + ']');
+    }
+
     ret[field.name] = field.value;
 
     // When a field uses a WYSIWYG format, the value needs to be extracted.
@@ -42,12 +56,12 @@ Drupal.media.formatForm.getOptions = function () {
       field.name = field.name.replace(/\[format\]/i, '[value]');
       field.key  = 'edit-' + field.name.replace(/[_\[]/g, '-').replace(/[\]]/g, '');
 
-      if (Drupal.wysiwyg.instances[field.key]) {
+      if (Drupal.wysiwyg && Drupal.wysiwyg.instances[field.key]) {
         // Retrieve the content from the WYSIWYG instance.
         ret[field.name] = Drupal.wysiwyg.instances[field.key].getContent();
 
-        // Escape the double-quotes and encode it to play nicely within JSON.
-        ret[field.name] = encodeURIComponent(ret[field.name].replace(/"/g, '\\"'));
+        // Encode the content to play nicely within JSON.
+        ret[field.name] = encodeURIComponent(ret[field.name]);
       }
     }
   });
