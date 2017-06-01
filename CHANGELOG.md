@@ -1,5 +1,8 @@
 #Smartaarhus changelog
 
+#1.0.6
+* Added rrssb library
+
 #1.0.5
 * Added several contrib modules
 * Updated core
