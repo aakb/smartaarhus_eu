@@ -1,9 +1,13 @@
 #region-sidebar-first {
+  
   margin-bottom: 40px;
+  @include bp(narrow) {
+    margin-top: 40px;  
+  }
+  
   body.not-front & {
     @include bp(narrow) {
       margin-left: 0;
-      margin-top: 40px;
       width: 170px; // 160
     }
     @include bp(normal) {
@@ -68,11 +72,11 @@
   }
 
   .news-entry-image {
-    visibility: hidden;
     display: none;
     @include bp(narrow) {
       display: block;
     }
+    visibility: hidden;
     img {
       display: block;
     }
@@ -81,7 +85,7 @@
     @extend %border-box;
     background: $blue;
     padding: 20px;
-  
+    
     @include bp(narrow) {
       bottom: 0;
       position: absolute;
@@ -109,13 +113,14 @@
       margin: 0 0 1em;
     }
     .news-entry-read-more {
+      
       font-size: 12px;
       position: relative;
       text-transform: uppercase;
       
       @include bp(narrow) {
-        bottom: 20px;
-        position: absolute;  
+        bottom: 20px;  
+        position: absolute;
       }
       
       &:before {
@@ -181,9 +186,9 @@
   }
   .project-entry-text {
     @extend %border-box;
-    background: $dark-grey;
+    background: $dark-grey;  
     padding: 20px;
-
+  
     @include bp(narrow) {
       bottom: 0;
       position: absolute;

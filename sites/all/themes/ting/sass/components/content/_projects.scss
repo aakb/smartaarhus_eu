@@ -1,40 +1,42 @@
+.view-sharing-economy.view-display-id-page,
 .view-ting-projects.view-display-id-page {
 
-  div.image {
-    margin-bottom: 1em;
-    @include bp(narrow) {
-      margin-left: -60px;
-      width: 570px;
-    }
-    @include bp(normal) {
-      width: 750px;
-    }
-  }
-  .resume {
-    line-height: 1.5;
-    margin: 0 0 1.5em;
-  }
-  .read-more {
-    text-align: right;
-    a {
+   div.image {
+     margin-bottom: 1em;
+     @include bp(narrow) {
+       margin-left: -60px;
+       width: 570px;
+     }
+     @include bp(normal) {
+       width: 750px;
+     }
+   }
+   .resume {
+     line-height: 1.5;
+     margin: 0 0 1.5em;
+   }
+   .read-more {
+     text-align: right;
+     a {
 
-      font-family: $font-sans-serif;
-      text-transform: uppercase;
-      &:after {
-        @extend %icon;
-        content: "\ea3c";
-        padding: 0 0 0 5px;
-        position: relative;
-        top: 0.1em;
-      }
-    }
-  }
+       font-family: $font-sans-serif;
+       text-transform: uppercase;
+       &:after {
+         @extend %icon;
+         content: "\ea3c";
+         padding: 0 0 0 5px;
+         position: relative;
+         top: 0.1em;
+       }
+     }
+   }
 
-  .view-content {
-    margin-left: -10px;
-  }
-}
+   .view-content {
+     margin-left: -10px;
+   }
+ }
 
+.view-id-sharing_economy,
 .view-id-ting_projects {
   .views-exposed-form {
     margin-bottom: 1.5em;
