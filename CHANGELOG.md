@@ -1,6 +1,6 @@
 # Smartaarhus changelog
 
-## 1.0.10
+## 1.0.11
 * SUPPORT-1421: Added sharing economy feature
 
 ## 1.0.9
