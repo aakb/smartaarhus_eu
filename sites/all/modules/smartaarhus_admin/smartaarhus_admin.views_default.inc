@@ -1600,6 +1600,10 @@ function smartaarhus_admin_views_default_views() {
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1655,6 +1659,20 @@ function smartaarhus_admin_views_default_views() {
     'field_group_resume' => 'field_group_resume',
     'body' => 'body',
   );
+  /* Filter criterion: Content: Deleøkonomisk projekt (field_sharing_economy_project) */
+  $handler->display->display_options['filters']['field_sharing_economy_project_value']['id'] = 'field_sharing_economy_project_value';
+  $handler->display->display_options['filters']['field_sharing_economy_project_value']['table'] = 'field_data_field_sharing_economy_project';
+  $handler->display->display_options['filters']['field_sharing_economy_project_value']['field'] = 'field_sharing_economy_project_value';
+  $handler->display->display_options['filters']['field_sharing_economy_project_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_sharing_economy_project_value']['group'] = 2;
+  /* Filter criterion: Content: Deleøkonomisk projekt (field_sharing_economy_project) */
+  $handler->display->display_options['filters']['field_sharing_economy_project_value_1']['id'] = 'field_sharing_economy_project_value_1';
+  $handler->display->display_options['filters']['field_sharing_economy_project_value_1']['table'] = 'field_data_field_sharing_economy_project';
+  $handler->display->display_options['filters']['field_sharing_economy_project_value_1']['field'] = 'field_sharing_economy_project_value';
+  $handler->display->display_options['filters']['field_sharing_economy_project_value_1']['value'] = array(
+    0 => '0',
+  );
+  $handler->display->display_options['filters']['field_sharing_economy_project_value_1']['group'] = 2;
   $handler->display->display_options['path'] = 'projects';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Projects';
