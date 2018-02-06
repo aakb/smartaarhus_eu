@@ -68,6 +68,7 @@ a {
   .view-ting-news .read-more & {
     color: $blue!important;
   }
+  .view-sharing-economy .read-more &,
   .view-ting-projects .read-more & {
     color: $blue!important;
   }
@@ -144,6 +145,7 @@ h3 {
       color: $black!important;
     }
   }
+  div.view-sharing-economy &,
   div.view-ting-projects & {
     font-family: $font-sans-serif;
     margin: 0 0 1em;
