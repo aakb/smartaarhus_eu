@@ -1,10 +1,12 @@
 /**
  * Projects
  */
+
 #block-views-ting-projects-block-1 {
 
   padding: 70px 0 50px;
 
+  .view-id-sharing_economy,
   .view-id-ting_projects {
     position: relative;
     @include bp(narrow) {
@@ -22,8 +24,10 @@
       display: block;
       position: relative;
       color: $black;
+
       &:hover {
         color: $white;
+
         .project-entry-text {
           background: rgba($blue, 0.5);
         }
@@ -211,10 +215,13 @@
       &:hover {
         color: $white;
         .news-entry-image {
-          visibility: visible;
+          //visibility: visible;
         }
         .news-entry-text {
           background: rgba($dark-grey, 0.7);
+          .news-entry-text-inner {
+            background: none;
+          }
         }
         .news-entry-read-more {
           &:before {
@@ -225,16 +232,22 @@
       }
     }
     .news-entry-image {
-      visibility: hidden;
+      //visibility: hidden;
     }
     .news-entry-text {
-      @extend %border-box;
-      background: $light-grey;
-      bottom: 0;
-      padding: 20px;
       position: absolute;
+      bottom: 0;
       top: 0;
-      width: 100%;
+      right: 0;
+      left: 0;
+      .news-entry-text-inner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 20px 20px 40px;  
+        background: $light-grey;
+      }
       span {
         display: block;
       }
@@ -248,7 +261,7 @@
         }
       }
       .news-entry-title {
-        font-size: 18px;
+        font-size: 16px;
         line-height: 21px;
         margin: 0 0 1em;
       }
@@ -256,7 +269,7 @@
         display: none;
         padding: 0 0 20px;
         @include bp(narrow) {
-          display: block;
+          //display: block;
         }
       }
       .news-entry-read-more {
@@ -294,8 +307,10 @@
   }
 }
 
-
-.page-projects {
+.page-sharing-economy .block-main,
+.page-projects .block-main,
+.page-dele-oekonomi .block-main,
+.page-projekter .block-main {
   @extend #block-views-ting-projects-block-1;
 
   padding-top: 0;

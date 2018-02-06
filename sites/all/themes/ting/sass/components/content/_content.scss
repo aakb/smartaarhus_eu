@@ -15,11 +15,14 @@
 #region-content {
   @extend %border-box;
   background: $white;
+  
+  @include bp(narrow) {
+    margin-bottom: 40px;  
+  }
 
   body.not-front & {
     @include bp(narrow) {
       margin-right: 0;
-      margin-bottom: 40px;
       width: 530px; // original: 520
     }
     @include bp(normal) {
@@ -30,8 +33,10 @@
     }
   }
 
-
-  body.not-front.page-projects & {
+  body.not-front.page-sharing-economy &,
+  body.not-front.page-projects &,
+  body.not-front.page-dele-oekonomi &,
+  body.not-front.page-projekter & {
     @include bp(narrow) {
       margin-right: 0;
       width: 100%;
@@ -48,12 +53,6 @@
 div.tabs {
   margin: 0 0 1em;
 }
-
-#block-system-main {
-
-}
-
-
 
 
 /**
