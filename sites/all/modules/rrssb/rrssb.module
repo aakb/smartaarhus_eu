@@ -9,8 +9,8 @@ require('rrssb.config.inc');
 /**
  * Define the RRSSB library location.
  */
-define('RRSSB_LIBRARY_VERSION', '1.10.0');
-define('RRSSB_LIBRARY_URI', 'https://github.com/kni-labs/rrssb/archive/' . RRSSB_LIBRARY_VERSION . '.zip');
+define('RRSSB_LIBRARY_MIN_VERSION', '0.5.x');
+define('RRSSB_LIBRARY_URI', 'https://github.com/AdamPS/rrssb-plus/releases');
 
 /**
  * Default value for variable rrssb_image_tokens
@@ -135,9 +135,9 @@ function theme_rrssb_config_buttons($variables) {
  * Prints the list of all buttons.
  */
 function theme_rrssb_button_list($variables) {
-  $output = '<div class="rrssb-item-list">';
+  $output = '<div class="rrssb">';
   if ($prefix = variable_get('rrssb_prefix')) {
-    $output .= '<span class="rrssb-prefix">' . t($prefix) . '</span>';
+    $output .= '<div class="rrssb-prefix">' . t($prefix) . '</div>';
   }
   $output .= '<ul class="rrssb-buttons">';
   $output .= drupal_render_children($variables['element']);
@@ -172,7 +172,7 @@ function theme_rrssb_button($variables) {
   extract($variables);
   $class = $button['popup'] ? 'class="popup"' : '';
   $output = <<<EOM
-<li class="rrssb-$name"><a href="$link" $class><span class="rrssb-icon">$button[svg]</span><span class="rrssb-text">$button[text]</span></a></li>
+<li class="rrssb-$name"><a href="$link" $class><span class="rrssb-icon"></span><span class="rrssb-text">$button[text]</span></a></li>
 EOM;
   return $output;
 }
@@ -219,13 +219,14 @@ function rrssb_form() {
     '#default_value' => variable_get('rrssb_follow'),
     '#description' => t('"Share" buttons invite the visitor to share the page from your site onto their page/channel/profile.  "Follow" buttons direct the visitor to your page/channel/profile.'),
   );
+
   // Create the config for the table of buttons.
   // Drupal handles all the storing to the rrssb_chosen variable automatically, serialising the array.
   // The table layout comes from the theme function.
   $form['rrssb_chosen'] = array(
     '#type' => 'fieldset',
     '#tree' => TRUE,
-    '#title' => t('Configure buttons'),
+    '#title' => t('Buttons'),
     '#theme' => 'rrssb_config_buttons',
   );
   foreach ($all_buttons as $name => $button) {
@@ -253,7 +254,7 @@ function rrssb_form() {
         'visible' => array(":input[name='rrssb_follow']" => array('value' => $require_follow))
       );
     }
-    if (isset($button['follow_url'])) {
+    if (isset($button['follow_url']) && strpos($button['follow_url'], '[rrssb:username]') !== FALSE) {
       $form['rrssb_chosen'][$name]['username'] = array(
         '#type' => 'textfield',
         '#default_value' => isset($chosen[$name]['username']) ? $chosen[$name]['username'] : '',
@@ -272,6 +273,71 @@ function rrssb_form() {
       '#attributes' => array('class' => array('item-row-weight')),
     );
   }
+
+  // Appearance settings stored as an array ready to pass to the library code.
+  $appearance = rrssb_appearance();
+  $form['rrssb_appearance'] = array(
+    '#type' => 'fieldset',
+    '#tree' => TRUE,
+    '#title' => t('Appearance'),
+  );
+  $form['rrssb_appearance']['size'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Size'),
+    '#size' => 5,
+    '#default_value' => $appearance['size'],
+    '#description' => t('Size, as a proportion of default size set in CSS.'),
+  );
+  $form['rrssb_appearance']['shrink'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Minimum size'),
+    '#size' => 5,
+    '#default_value' => $appearance['shrink'],
+    '#description' => t('Minimum size to shrink buttons to, as a proportion of original size.'),
+  );
+  $form['rrssb_appearance']['regrow'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Extra row size'),
+    '#size' => 5,
+    '#default_value' => $appearance['regrow'],
+    '#description' => t('Maximum size of buttons after they have been forced to split onto extra rows of buttons, as a proportion of original size.'),
+  );
+  $form['rrssb_appearance']['minRows'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Minimum rows'),
+    '#size' => 5,
+    '#default_value' => $appearance['minRows'],
+    '#description' => t('Minimum number of rows of buttons.  Set to a large value to create vertical layout.'),
+  );
+  $form['rrssb_appearance']['maxRows'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Maximum rows'),
+    '#size' => 5,
+    '#default_value' => $appearance['maxRows'],
+    '#description' => t('Maximum number of rows of buttons.  If more rows would be needed, instead the labels are hidden.  Set to a large value to keep labels if at all possible.'),
+  );
+  $form['rrssb_appearance']['prefixReserve'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Prefix reserved width'),
+    '#size' => 5,
+    '#default_value' => $appearance['prefixReserve'],
+    '#description' => t('Proportion of total width reserved for prefix to be inline.'),
+  );
+  $form['rrssb_appearance']['prefixHide'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Prefix maximum width'),
+    '#size' => 5,
+    '#default_value' => $appearance['prefixHide'],
+    '#description' => t('Maximum prefix width as a proportion of total width before hiding prefix.'),
+  );
+  $form['rrssb_appearance']['alignRight'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Right-align buttons'),
+    '#size' => 5,
+    '#default_value' => $appearance['alignRight'],
+    '#description' => t('By default, buttons are left-aligned, with any padding added on the right.  Enable this to right-align, and instead pad on the left.'),
+  );
+
   $form['rrssb_prefix'] = array(
     '#type' => 'textfield',
     '#title' => t('Prefix text before the buttons'),
@@ -315,26 +381,47 @@ function rrssb_form_validate($form, &$form_state) {
 function rrssb_form_submit() {
   // Clear cache.
   cache_clear_all('rrssb_buttons', 'cache');
+  cache_clear_all('rrssb:rrssb:', 'cache_block', TRUE);
+
+  // Delete auto-generated CSS.
+  rrssb_flush_caches();
+}
+
+/**
+ * Implements hook_flush_caches();
+ */
+function rrssb_flush_caches() {
+  // Delete auto-generated CSS.
+  if ($old = variable_get('rrssb_css_file')) {
+    file_unmanaged_delete($old);
+  }
+  variable_del('rrssb_css_file');
 }
 
 /**
  * Implements hook_libraries_info().
  */
 function rrssb_libraries_info() {
-  $libraries['rrssb'] = array(
-    'name' => 'Ridiculously Responsive Social Share Buttons',
-    'vendor url' => 'http://kurtnoble.com/labs/rrssb/',
+  $test = variable_get('rrssb_test');
+  $libraries['rrssb-plus'] = array(
+    'name' => 'Ridiculously Responsive Social Share Buttons Plus',
+    'vendor url' => 'http://www.albanyweb.co.uk/rrssb-plus',
     'download url' => RRSSB_LIBRARY_URI,
     'version arguments' => array(
-      'file' => 'package.json',
-      'pattern' => '/"version": "([\d\.]+)"/',
+      'file' => 'VERSION.txt',
+      'pattern' => '/([\d\.x]+)/',
     ),
     'files' => array(
       'js' => array(
-        'js/rrssb.min.js',
+        $test ? 'js/rrssb.js' : 'js/rrssb.min.js',
       ),
       'css' => array(
         'css/rrssb.css',
+      ),
+    ),
+    'integration files' => array(
+      'rrssb' => array(
+        'js' => array('rrssb.init.js')
       ),
     ),
   );
@@ -350,8 +437,8 @@ function rrssb_requirements($phase) {
   // is to install the module and then use the drush command to get the library.
   $requirements = array();
   if ($phase == 'runtime') {
-    $requirements['rrssb']['title'] = t('RRSSB library');
-    $library = libraries_detect('rrssb');
+    $requirements['rrssb']['title'] = t('RRSSB+ library');
+    $library = libraries_detect('rrssb-plus');
     if (!$library['installed']) {
       $requirements['rrssb']['value'] = t('Not installed');
       $requirements['rrssb']['severity'] = REQUIREMENT_ERROR;
@@ -359,15 +446,11 @@ function rrssb_requirements($phase) {
     }
     else {
       $requirements['rrssb']['value'] = $library['version'];
-      $compare = version_compare($library['version'], RRSSB_LIBRARY_VERSION);
+      $compare = version_compare($library['version'], RRSSB_LIBRARY_MIN_VERSION);
 
       if ($compare < 0) {
         $requirements['rrssb']['severity'] = REQUIREMENT_ERROR;
         $requirements['rrssb']['description'] = t('Library version is too old.  ');
-      }
-      else if ($compare > 0) {
-        $requirements['rrssb']['severity'] = REQUIREMENT_WARNING;
-        $requirements['rrssb']['description'] = t('Library version is newer than has been tested.  ');
       }
       else {
         $requirements['rrssb']['severity'] = REQUIREMENT_OK;
@@ -460,7 +543,17 @@ function rrssb_get_buttons($node = NULL) {
 
   // Add css and js.
   // Use #attached rather than adding directly else block caching is broken.
-  $items['#attached']['libraries_load'][] = array('rrssb');
+  $css = variable_get('rrssb_css_file');
+  if (!$css) {
+    $css = rrssb_gen_css();
+  }
+
+  $items['#attached']['libraries_load'][] = array('rrssb-plus');
+  $items['#attached']['css'] = array($css);
+  $items['#attached']['js'][] = array(
+    'type' => 'setting',
+    'data' => array('rrssb' => rrssb_appearance()),
+  );
 
   return $items;
 }
@@ -492,7 +585,8 @@ function rrssb_settings($all = FALSE) {
   $defaults = array('enabled' => FALSE, 'weight' => 0, 'username' => '', 'popup' => TRUE);
   $buttons = module_invoke_all('rrssb_buttons');
   drupal_alter('rrssb_buttons', $buttons);
-  $iconsDir = libraries_get_path('rrssb') . '/icons';
+  $iconsDir = libraries_get_path('rrssb-plus') . '/icons';
+  $follow = variable_get('rrssb_follow');
 
   // Set some defaults.
   foreach ($buttons as $name => &$button) {
@@ -510,6 +604,10 @@ function rrssb_settings($all = FALSE) {
       $button['svg'] = file_get_contents($svgfile);
     }
 
+    if ($follow && isset($button['title_follow'])) {
+      $button['text'] = $button['title_follow'];
+    }
+
     // Default text to name.
     if (!isset($button['text'])) {
       $button['text'] = $name;
@@ -521,12 +619,61 @@ function rrssb_settings($all = FALSE) {
 
   if (!$all) {
     // Filter to only include enabled ones with a URL configured.
-    $key = variable_get('rrssb_follow') ? 'follow_url' : 'share_url';
+    $key = $follow ? 'follow_url' : 'share_url';
     $buttons = array_filter($buttons, function($button) use($key) { return $button['enabled'] && isset($button[$key]); });
     cache_set('rrssb_buttons', $buttons);
   }
 
   return $buttons;
+}
+
+/**
+ * Fetch appearance settings.  These are the configuration parameters to pass to the library.
+ */
+function rrssb_appearance() {
+  $appearance = variable_get('rrssb_appearance');
+  return $appearance;
+}
+
+/**
+ * Auto-generate CSS for buttons.
+ *
+ * The RRSSB library CSS is static.  This function takes account the results of hook_rrssb_buttons and hook_rrssb_buttons_alter
+ * to create dynamic, site-specific CSS.  It optimises by only including buttons that are enabled.
+ *
+ * The fact that this module is not relying on library CSS for buttons means that there is greater compatibility to work
+ * with older library versions that are missing CSS for newer buttons.
+ */
+function rrssb_gen_css() {
+  $css = "/* Auto-generated RRSSB CSS file. */\n";
+  $settings = rrssb_settings();
+  foreach ($settings as $name => $button) {
+    // Add a white fill.
+    $svg = str_replace('<path ', '<path fill="#FFF" ', $button['svg']);
+    // URL encode - only certain special characters are needed: <>#" and " can be safely swapped for '.
+    $svg = strtr($svg, array('<' => '%3C', '>' => '%3E', '#' => '%23', '"' => '\''));
+
+    $css .= <<<EOM
+.rrssb-buttons li.rrssb-$name a { background-color: $button[color]; }
+.rrssb-buttons li.rrssb-$name a:hover { background-color: $button[color_hover]; }
+.rrssb-$name .rrssb-icon { background: url("data:image/svg+xml,$svg"); }
+
+EOM;
+  }
+
+  // Save to a unique filename.
+  $id = substr(hash('sha256', serialize($settings) . microtime()), 0, 8);
+  $dir = 'public://rrssb';
+  $file = "$dir/rrssb.$id.css";
+  file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
+  file_unmanaged_save_data($css, $file, FILE_EXISTS_REPLACE);
+
+  // Delete the old file and record the new location.
+  if ($old = variable_get('rrssb_css_file')) {
+    file_unmanaged_delete($old);
+  }
+  variable_set('rrssb_css_file', $file);
+  return $file;
 }
 
 /**
