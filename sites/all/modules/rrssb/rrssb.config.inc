@@ -11,7 +11,6 @@ function rrssb_rrssb_buttons() {
       'color_hover' => '#095fb4',
     ),
     'email' => array(
-      'svgfile' => '<icons>/mail.min.svg',
       'share_url' => 'mailto:?subject=[rrssb:title]&body=[rrssb:url]',
       'color' => '#0a88ff',
       'color_hover' => '#006ed6',
@@ -34,8 +33,7 @@ function rrssb_rrssb_buttons() {
       'color_hover' => '#2b2b2b',
     ),
     'googleplus' => array(
-      'svgfile' => '<icons>/google_plus.min.svg',
-      'share_url' => 'https://plus.google.com/share?url=[rrssb:title] [rrssb:url]',
+      'share_url' => 'https://plus.google.com/share?url=[rrssb:url]',
       'follow_url' => 'https://plus.google.com/[rrssb:username]/posts',
       'color' => '#e93f2e',
       'color_hover' => '#ce2616',
@@ -46,6 +44,12 @@ function rrssb_rrssb_buttons() {
       'color' => '#f60',
       'color_hover' => '#cc5200',
     ),
+    'join' => array(
+      'follow_url' => '/user/register',
+      'color' => '#dc143c',
+      'color_hover' => '#ad102f',
+      'popup' => FALSE,
+    ),
     'linkedin' => array(
       'share_url' => 'http://www.linkedin.com/shareArticle?mini=true&url=[rrssb:url]&title=[rrssb:title]',
       'follow_url' => 'https://www.linkedin.com/in/[rrssb:username]',
@@ -53,8 +57,7 @@ function rrssb_rrssb_buttons() {
       'color_hover' => '#005983',
     ),
     'pinterest' => array(
-      // Encoding a slash prevents Pinterest's JS from "hijacking" the link - see http://stackoverflow.com/questions/11312923/custom-pinterest-button-for-custom-url-text-link-image-or-both.
-      'share_url' => 'http://pinterest.com/pin/create%2Fbutton/?url=[rrssb:url]&media=[rrssb:image]&description=[rrssb:title]',
+      'share_url' => 'http://pinterest.com/pin/create/link/?url=[rrssb:url]&media=[rrssb:image]&description=[rrssb:title]',
       'follow_url' => 'https://www.pinterest.com/[rrssb:username]',
       'color' => '#b81621',
       'color_hover' => '#8a1119',
@@ -83,7 +86,7 @@ function rrssb_rrssb_buttons() {
       'color_hover' => '#22364a',
     ),
     'twitter' => array(
-      'share_url' => 'https://twitter.com//intent/tweet?text=[rrssb:title]&url=[rrssb:url]',
+      'share_url' => 'https://twitter.com/intent/tweet?text=[rrssb:title]&url=[rrssb:url]',
       'follow_url' => 'https://twitter.com/[rrssb:username]',
       'color' => '#26c4f1',
       'color_hover' => '#0eaad6',
